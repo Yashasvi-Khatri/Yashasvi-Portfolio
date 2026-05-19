@@ -18,6 +18,7 @@ export default function Navbar() {
   const [active, setActive] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
+  const [showFullName, setShowFullName] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -58,12 +59,26 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-6 h-[60px] flex items-center gap-8">
         {/* Logo */}
-        <button
-          onClick={() => scrollTo("#home")}
-          className="font-mono font-semibold text-[15px] text-zinc-100 tracking-tight shrink-0"
-        >
-          YK<span className="text-indigo-500">.</span>
-        </button>
+        <div className="relative shrink-0">
+          <button
+            onClick={() => {
+              setShowFullName(!showFullName);
+              scrollTo("#home");
+            }}
+            className="font-mono font-semibold text-[15px] text-zinc-100 tracking-tight"
+          >
+            YK<span className="text-indigo-500">.</span>
+          </button>
+          <div
+            className={`absolute left-0 top-full mt-1 font-mono text-[13px] text-zinc-300 whitespace-nowrap transition-all duration-300 ease-out ${
+              showFullName
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 -translate-y-2 pointer-events-none"
+            }`}
+          >
+            Yashasvi Khatri
+          </div>
+        </div>
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-1 flex-1 justify-center">

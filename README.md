@@ -2,6 +2,8 @@
 
 Personal portfolio website built with **Next.js 15**, **TypeScript**, and **Tailwind CSS**.
 
+© 2026 Yashasvi Khatri. All rights reserved. Khatrii Enterprises™.
+
 ## 🚀 Quick Start (Run Locally)
 
 ### Prerequisites
