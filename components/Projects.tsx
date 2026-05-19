@@ -18,7 +18,7 @@ const PROJECTS = [
       "JWT authentication & REST APIs",
     ],
     stack: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
-    live: "https://eco-educator-8ivl.vercel.app/",
+    live: "https://eco-educator-z87n.vercel.app/",
     github: "https://github.com/Yashasvi-Khatri/EcoKids",
     category: "EdTech",
     accent: "#10b981",
