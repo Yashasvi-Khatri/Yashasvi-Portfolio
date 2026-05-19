@@ -138,7 +138,7 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
                   </li>
                   <li>
                     Trained TensorFlow and Random Forest regression models for real-time CO₂ emission
-                    forecasting, achieving R² = 0.87 and 8.5% MAPE --- surpassing the project's baseline
+                    forecasting, achieving R² = 0.87 and 8.5% MAPE --- surpassing the project&apos;s baseline
                     accuracy target by 15%.
                   </li>
                   <li>
