@@ -87,7 +87,7 @@ function ProjectCard({
   project: (typeof PROJECTS)[0];
   index: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef(null);
   const inView = useInView(ref);
 
   return (

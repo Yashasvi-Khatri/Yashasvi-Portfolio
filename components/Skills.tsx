@@ -63,14 +63,12 @@ const CATEGORY_ICONS: Record<string, string> = {
 const STATS = [
   { value: "5", label: "Skill Categories" },
   { value: "35+", label: "Technologies" },
-  { value: "4+", label: "Live Projects" },
-  { value: "2023–", label: "Ongoing Growth" },
 ];
 
 export default function Skills() {
-  const [active, setActive] = useState("Frontend");
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef(null);
   const inView = useInView(ref);
+  const [active, setActive] = useState(Object.keys(SKILLS)[0]);
 
   return (
     <section id="skills" className="py-24 px-6">

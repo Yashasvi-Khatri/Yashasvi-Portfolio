@@ -12,7 +12,7 @@ const BULLETS = [
 ];
 
 export default function Experience() {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef(null);
   const inView = useInView(ref);
 
   return (

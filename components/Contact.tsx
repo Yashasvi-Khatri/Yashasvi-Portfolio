@@ -1,13 +1,13 @@
 "use client";
 
-import { useRef, RefObject } from "react";
+import { useRef } from "react";
 import { Github, Linkedin, Mail, Phone } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 import { useInView } from "@/hooks/useInView";
 
 export default function Contact() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref as RefObject<HTMLDivElement>);
+  const ref = useRef(null);
+  const inView = useInView(ref);
 
   return (
     <section id="contact" className="py-24 px-6">

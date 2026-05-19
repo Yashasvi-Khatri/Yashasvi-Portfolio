@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, RefObject } from "react";
+import { useRef } from "react";
 import SectionHeader from "./SectionHeader";
 import { useInView } from "@/hooks/useInView";
 
@@ -14,8 +14,8 @@ const INTERESTS = [
 ];
 
 export default function About() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref as RefObject<HTMLDivElement>);
+  const ref = useRef(null);
+  const inView = useInView(ref);
 
   return (
     <section id="about" className="py-24 px-6">
