@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
-import { useInView } from "@/hooks/useInView";
 
 const BULLETS = [
   "Contributed to mission-critical R&D projects within a zero-defect-tolerance engineering environment, applying structured debugging and systematic problem-solving to complex defense technology challenges.",
@@ -12,9 +11,6 @@ const BULLETS = [
 ];
 
 export default function Experience() {
-  const ref = useRef(null);
-  const inView = useInView(ref);
-
   return (
     <section id="experience" className="py-24 px-6">
       <div className="max-w-3xl mx-auto">
@@ -23,14 +19,12 @@ export default function Experience() {
           subtitle="Professional engagements in high-reliability engineering environments."
         />
 
-        <div
-          ref={ref}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
           className="relative card-bg card-border rounded-2xl p-9 overflow-hidden"
-          style={{
-            opacity: inView ? 1 : 0,
-            transform: inView ? "translateY(0)" : "translateY(20px)",
-            transition: "all 0.7s cubic-bezier(0.16,1,0.3,1)",
-          }}
         >
           {/* Left accent bar */}
           <div
@@ -57,10 +51,17 @@ export default function Experience() {
 
           <ul className="space-y-3">
             {BULLETS.map((b, i) => (
-              <li key={i} className="flex items-start gap-3">
+              <motion.li
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="flex items-start gap-3"
+              >
                 <span className="text-indigo-400 mt-1 shrink-0">▸</span>
                 <span className="text-[13px] text-zinc-400 leading-relaxed">{b}</span>
-              </li>
+              </motion.li>
             ))}
           </ul>
 
@@ -70,16 +71,20 @@ export default function Experience() {
               "Cross-functional Engineering",
               "Systems Reliability",
               "Defense Technology",
-            ].map((tag) => (
-              <span
+            ].map((tag, i) => (
+              <motion.span
                 key={tag}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.4 + i * 0.05 }}
                 className="text-[11px] font-medium px-2.5 py-1 rounded bg-white/[0.04] text-zinc-500 border border-white/[0.07]"
               >
                 {tag}
-              </span>
+              </motion.span>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import SectionHeader from "./SectionHeader";
-import { useInView } from "@/hooks/useInView";
 
 const SKILLS: Record<string, string[]> = {
   Frontend: [
@@ -66,13 +66,11 @@ const STATS = [
 ];
 
 export default function Skills() {
-  const ref = useRef(null);
-  const inView = useInView(ref);
   const [active, setActive] = useState(Object.keys(SKILLS)[0]);
 
   return (
     <section id="skills" className="py-24 px-6">
-      <div className="max-w-4xl mx-auto" ref={ref}>
+      <div className="max-w-4xl mx-auto">
         <SectionHeader
           title="Technical Stack"
           subtitle="Categorized engineering capabilities across the full product lifecycle."
@@ -96,45 +94,56 @@ export default function Skills() {
         </div>
 
         {/* Skill chips */}
-        <div
-          key={active}
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3"
-          style={{
-            opacity: inView ? 1 : 0,
-            transform: inView ? "translateY(0)" : "translateY(12px)",
-            transition: "all 0.5s cubic-bezier(0.16,1,0.3,1)",
-          }}
-        >
-          {SKILLS[active].map((skill, i) => (
-            <div
-              key={skill}
-              className="flex items-center gap-2.5 card-bg card-border rounded-xl px-4 py-3 hover:border-indigo-500/30 transition-colors"
-              style={{
-                animationDelay: `${i * 40}ms`,
-              }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0" />
-              <span className="text-[13px] font-medium text-zinc-300">
-                {skill}
-              </span>
-            </div>
-          ))}
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3"
+          >
+            {SKILLS[active].map((skill, i) => (
+              <motion.div
+                key={skill}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.2, delay: i * 0.05 }}
+                className="flex items-center gap-2.5 card-bg card-border rounded-xl px-4 py-3 hover:border-indigo-500/30 transition-colors"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0" />
+                <span className="text-[13px] font-medium text-zinc-300">
+                  {skill}
+                </span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-12">
-          {STATS.map(({ value, label }) => (
-            <div
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-12"
+        >
+          {STATS.map(({ value, label }, i) => (
+            <motion.div
               key={label}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.4 + i * 0.1 }}
               className="card-bg card-border rounded-xl p-5 text-center"
             >
               <div className="text-[22px] font-bold text-indigo-400 tracking-tight">
                 {value}
               </div>
               <div className="text-[12px] text-zinc-500 mt-1">{label}</div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

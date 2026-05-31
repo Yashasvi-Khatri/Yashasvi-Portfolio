@@ -3,16 +3,25 @@
 import { useState, useEffect } from "react";
 
 const LINES = [
-  { type: "cmd", text: "$ init portfolio --stack mern" },
-  { type: "info", text: "✓ React 18 + TypeScript ready" },
-  { type: "info", text: "✓ Node.js + Express.js configured" },
-  { type: "info", text: "✓ MongoDB Atlas connected" },
-  { type: "cmd", text: "$ deploy --platform vercel" },
-  { type: "success", text: "▶ Build optimized: 98/100" },
-  { type: "success", text: "▶ Live on production.vercel.app" },
-  { type: "cmd", text: "$ run --ai-pipeline train" },
-  { type: "info", text: "✓ Model accuracy: 94.2%" },
-  { type: "success", text: "✓ WebSocket server ready :3001" },
+  { type: "cmd", text: "$ whoami" },
+  { type: "info", text: "Yashasvi Khatri" },
+  { type: "cmd", text: "$ cat profile.json" },
+  { type: "info", text: "{" },
+  { type: "info", text: '  "role": "Full Stack Engineer",' },
+  { type: "info", text: '  "location": "New Delhi, India",' },
+  { type: "info", text: '  "education": "GGSIPU (2023-2027)",' },
+  { type: "info", text: '  "status": "Open to opportunities"' },
+  { type: "info", text: "}" },
+  { type: "cmd", text: "$ cat experience.txt" },
+  { type: "info", text: "→ DRDO R&D Intern (Jun-Jul 2025)" },
+  { type: "info", text: "→ Mission-critical engineering" },
+  { type: "cmd", text: "$ cat research.md" },
+  { type: "info", text: "→ AI-Assisted Music Composition" },
+  { type: "info", text: "→ Carbon Footprint Management" },
+  { type: "success", text: "✓ Published researcher" },
+  { type: "cmd", text: "$ ./contact.sh" },
+  { type: "success", text: "→ yashasvikhatrii@gmail.com" },
+  { type: "success", text: "→ +91 9821955539" },
 ];
 
 export default function Terminal() {
@@ -47,12 +56,12 @@ export default function Terminal() {
         <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
         <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
         <span className="ml-3 text-[11px] text-zinc-500 font-mono">
-          portfolio — terminal
+          yashasvi — portfolio
         </span>
       </div>
 
       {/* Lines */}
-      <div className="p-5 min-h-[220px]">
+      <div className="p-5 min-h-[280px]">
         {lines.map((l, i) => (
           <div
             key={i}

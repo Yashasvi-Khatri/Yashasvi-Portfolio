@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
-import { useInView } from "@/hooks/useInView";
 
 const INTERESTS = [
   "AI-enabled products",
@@ -14,21 +13,17 @@ const INTERESTS = [
 ];
 
 export default function About() {
-  const ref = useRef(null);
-  const inView = useInView(ref);
-
   return (
     <section id="about" className="py-24 px-6">
-      <div className="max-w-4xl mx-auto" ref={ref}>
+      <div className="max-w-4xl mx-auto">
         <SectionHeader title="About" />
 
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7 }}
           className="grid grid-cols-1 md:grid-cols-2 gap-8"
-          style={{
-            opacity: inView ? 1 : 0,
-            transform: inView ? "translateY(0)" : "translateY(20px)",
-            transition: "all 0.7s cubic-bezier(0.16,1,0.3,1)",
-          }}
         >
           {/* Bio */}
           <div>
@@ -58,18 +53,22 @@ export default function About() {
               Interested in
             </h4>
             <div className="grid grid-cols-1 gap-2.5">
-              {INTERESTS.map((item) => (
-                <div
+              {INTERESTS.map((item, i) => (
+                <motion.div
                   key={item}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
                   className="flex items-center gap-3 card-bg card-border rounded-xl px-4 py-3 hover:border-indigo-500/30 transition-colors"
                 >
                   <span className="text-indigo-400">▸</span>
                   <span className="text-[14px] text-zinc-300">{item}</span>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

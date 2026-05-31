@@ -6,7 +6,9 @@ import ResumeModal from "./Resume";
 
 const NAV_LINKS = [
   { label: "Home", href: "#home" },
-  { label: "Projects", href: "#projects" },
+  { label: "Featured", href: "#featured-projects" },
+  { label: "GitHub", href: "#github" },
+  { label: "Research", href: "#research" },
   { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
   { label: "About", href: "#about" },
