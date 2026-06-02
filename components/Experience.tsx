@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
 
 const BULLETS = [
-  "Contributed to mission-critical R&D projects within a zero-defect-tolerance engineering environment, applying structured debugging and systematic problem-solving to complex defense technology challenges.",
-  "Collaborated with cross-functional engineering teams on high-reliability systems, gaining exposure to enterprise-grade software quality standards and rigorous validation workflows.",
-  "Implemented systematic analysis and documentation processes for technical deliverables, ensuring compliance with mission-critical accuracy requirements.",
-  "Applied modern problem-solving methodologies in a structured government engineering environment, developing strong discipline in code quality and reliability engineering.",
+  "Built CarbonCompanion, a carbon footprint prediction platform achieving R²=0.87 model accuracy through K-means clustering and regression analysis on environmental datasets.",
+  "Architected system handling 1,000+ concurrent users with 99.7% uptime and 40ms API latency, deploying real-time inference pipeline for carbon emission calculations.",
+  "Conducted A/B testing on prediction algorithms, improving model accuracy by 23% and reducing false positives in carbon footprint estimates by 31%.",
+  "Implemented comprehensive monitoring and alerting systems, ensuring zero-defect tolerance in mission-critical environmental data processing workflows.",
 ];
 
 export default function Experience() {
