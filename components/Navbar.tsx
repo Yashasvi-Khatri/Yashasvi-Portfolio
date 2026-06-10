@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Github, Linkedin, FileText } from "lucide-react";
 import ResumeModal from "./Resume";
+import Button from "./ui/Button";
 
 const NAV_LINKS = [
   { label: "Home", href: "#home" },
@@ -55,7 +56,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-zinc-950/90 backdrop-blur-xl border-b border-white/[0.06]"
+          ? "bg-white/90 backdrop-blur-xl border-b border-[#051A24]/10"
           : "bg-transparent"
       }`}
     >
@@ -67,12 +68,12 @@ export default function Navbar() {
               setShowFullName(!showFullName);
               scrollTo("#home");
             }}
-            className="font-mono font-semibold text-[15px] text-zinc-100 tracking-tight"
+            className="font-mono font-semibold text-[15px] text-[#051A24] tracking-tight"
           >
-            YK<span className="text-indigo-500">.</span>
+            YK<span className="text-[#051A24]">.</span>
           </button>
           <div
-            className={`absolute left-0 top-full mt-1 font-mono text-[13px] text-zinc-300 whitespace-nowrap transition-all duration-300 ease-out ${
+            className={`absolute left-0 top-full mt-1 font-mono text-[13px] text-[#051A24]/60 whitespace-nowrap transition-all duration-300 ease-out ${
               showFullName
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 -translate-y-2 pointer-events-none"
@@ -90,8 +91,8 @@ export default function Navbar() {
               onClick={() => scrollTo(l.href)}
               className={`px-3 py-1.5 rounded-md text-[13px] font-medium transition-colors duration-200 ${
                 active === l.href.replace("#", "")
-                  ? "text-indigo-400"
-                  : "text-zinc-400 hover:text-zinc-200"
+                  ? "text-[#051A24]"
+                  : "text-[#051A24]/60 hover:text-[#051A24]"
               }`}
             >
               {l.label}
@@ -105,7 +106,7 @@ export default function Navbar() {
             href="https://github.com/Yashasvi-Khatri"
             target="_blank"
             rel="noreferrer"
-            className="text-zinc-400 hover:text-zinc-200 transition-colors"
+            className="text-[#051A24]/60 hover:text-[#051A24] transition-colors"
             aria-label="GitHub"
           >
             <Github size={17} />
@@ -114,22 +115,23 @@ export default function Navbar() {
             href="https://www.linkedin.com/in/yashasvi-khatri-378231217/"
             target="_blank"
             rel="noreferrer"
-            className="text-zinc-400 hover:text-zinc-200 transition-colors"
+            className="text-[#051A24]/60 hover:text-[#051A24] transition-colors"
             aria-label="LinkedIn"
           >
             <Linkedin size={17} />
           </a>
-          <button
+          <Button
+            variant="primary"
             onClick={() => setResumeOpen(true)}
-            className="hidden sm:flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-[12px] font-semibold px-3.5 py-1.5 rounded-md transition-colors"
+            className="hidden sm:flex items-center gap-1.5 text-[12px] px-3.5 py-1.5"
           >
             <FileText size={13} />
             Resume
-          </button>
+          </Button>
 
           {/* Hamburger */}
           <button
-            className="md:hidden text-zinc-400 ml-1"
+            className="md:hidden text-[#051A24]/60 ml-1"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Toggle menu"
           >
@@ -154,22 +156,23 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-zinc-950/95 backdrop-blur-xl border-t border-white/[0.06] px-6 py-4 flex flex-col gap-1">
+        <div className="md:hidden bg-white/95 backdrop-blur-xl border-t border-[#051A24]/10 px-6 py-4 flex flex-col gap-1">
           {NAV_LINKS.map((l) => (
             <button
               key={l.href}
               onClick={() => scrollTo(l.href)}
-              className="text-left px-3 py-2.5 rounded-md text-[14px] text-zinc-300 hover:text-white hover:bg-white/5 transition-colors"
+              className="text-left px-3 py-2.5 rounded-md text-[14px] text-[#051A24]/60 hover:text-[#051A24] hover:bg-[#051A24]/5 transition-colors"
             >
               {l.label}
             </button>
           ))}
-          <button
+          <Button
+            variant="primary"
             onClick={() => setResumeOpen(true)}
-            className="mt-2 flex items-center gap-2 text-[13px] text-indigo-400 px-3 py-2"
+            className="mt-2 flex items-center justify-center gap-2 text-[13px] px-3 py-2"
           >
             <FileText size={14} /> Download Resume
-          </button>
+          </Button>
         </div>
       )}
 

@@ -1,13 +1,14 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import CredibilityStrip from "@/components/CredibilityStrip";
-import Experience from "@/components/Experience";
-import FeaturedProjects from "@/components/FeaturedProjects";
-import GitHubPinnedRepos from "@/components/GitHubPinnedRepos";
+import InfiniteMarquee from "@/components/InfiniteMarquee";
+import QuoteSection from "@/components/QuoteSection";
+import ProjectsShowcase from "@/components/ProjectsShowcase";
+import MoreProjects from "@/components/MoreProjects";
+import ExperienceHighlight from "@/components/ExperienceHighlight";
 import Research from "@/components/Research";
 import Skills from "@/components/Skills";
-import About from "@/components/About";
-import Contact from "@/components/Contact";
+import CTASection from "@/components/CTASection";
+import BottomNav from "@/components/BottomNav";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -16,45 +17,36 @@ export default function Home() {
       <nav>
         <Navbar />
       </nav>
-      <main id="main-content" className="min-h-screen bg-zinc-950 text-zinc-100 relative overflow-x-hidden">
-        {/* Global radial glow */}
-        <div
-          className="pointer-events-none fixed inset-0 z-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99,102,241,0.10) 0%, transparent 60%)",
-          }}
-        />
-        <div className="relative z-10">
-          <section>
-            <Hero />
-          </section>
-          <section>
-            <CredibilityStrip />
-          </section>
-          <section>
-            <Experience />
-          </section>
-          <section>
-            <FeaturedProjects />
-          </section>
-          <section>
-            <GitHubPinnedRepos />
-          </section>
-          <section>
-            <Research />
-          </section>
-          <section>
-            <Skills />
-          </section>
-          <section>
-            <About />
-          </section>
-          <section>
-            <Contact />
-          </section>
-        </div>
+      <main id="main-content" className="min-h-screen pb-80">
+        <section>
+          <Hero />
+        </section>
+        <section>
+          <InfiniteMarquee />
+        </section>
+        <section>
+          <QuoteSection />
+        </section>
+        <section id="featured-projects">
+          <ProjectsShowcase />
+        </section>
+        <section>
+          <MoreProjects />
+        </section>
+        <section id="experience">
+          <ExperienceHighlight />
+        </section>
+        <section id="research">
+          <Research />
+        </section>
+        <section id="skills">
+          <Skills />
+        </section>
+        <section>
+          <CTASection />
+        </section>
       </main>
+      <BottomNav />
       <footer>
         <Footer />
       </footer>

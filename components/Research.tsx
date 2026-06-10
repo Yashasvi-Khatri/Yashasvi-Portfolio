@@ -1,8 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { BookOpen, Lightbulb, Target, Link2, ArrowRight, Cpu, Leaf } from "lucide-react";
-import SectionHeader from "./SectionHeader";
+import { useInViewAnimation } from "../hooks/useInViewAnimation";
 
 const RESEARCH_PROJECTS = [
   {
@@ -62,165 +61,149 @@ const RESEARCH_PROJECTS = [
 
 function ResearchCard({ project, index }: { project: typeof RESEARCH_PROJECTS[0]; index: number }) {
   const Icon = project.icon;
+  const { ref, inView } = useInViewAnimation<HTMLDivElement>();
   const accentColors = {
     indigo: {
-      bg: "bg-indigo-500/10",
-      text: "text-indigo-400",
-      border: "border-indigo-500/20",
-      gradient: "from-indigo-500/5 to-violet-500/5",
+      bg: "bg-[#051A24]/5",
+      text: "text-[#051A24]",
+      border: "border-[#051A24]/10",
     },
     emerald: {
-      bg: "bg-emerald-500/10",
-      text: "text-emerald-400",
-      border: "border-emerald-500/20",
-      gradient: "from-emerald-500/5 to-teal-500/5",
+      bg: "bg-[#051A24]/5",
+      text: "text-[#051A24]",
+      border: "border-[#051A24]/10",
     },
   };
   const colors = accentColors[project.accent as keyof typeof accentColors];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, delay: index * 0.2 }}
-      className="card-bg card-border rounded-3xl overflow-hidden"
+    <div
+      ref={ref}
+      className={inView ? "animate-fade-in-up" : "opacity-0"}
+      style={{ animationDelay: `${0.1 + index * 0.2}s` }}
     >
-      {/* Header */}
-      <div className={`p-8 md:p-10 border-b border-white/[0.06] bg-gradient-to-r ${colors.gradient}`}>
-        <div className="flex items-start gap-4">
-          <div className={`w-12 h-12 rounded-xl ${colors.bg} flex items-center justify-center shrink-0`}>
-            <Icon className={`w-6 h-6 ${colors.text}`} />
-          </div>
-          <div>
-            <h3 className="text-2xl md:text-3xl font-bold text-zinc-100 tracking-tight mb-2">
-              {project.title}
-            </h3>
-            <p className="text-sm text-zinc-500">{project.category}</p>
+      <div className="bg-white border border-[#051A24]/10 rounded-2xl overflow-hidden">
+        {/* Header */}
+        <div className={`p-8 md:p-10 border-b border-[#051A24]/10 ${colors.bg}`}>
+          <div className="flex items-start gap-4">
+            <div className={`w-12 h-12 rounded-xl ${colors.bg} flex items-center justify-center shrink-0`}>
+              <Icon className={`w-6 h-6 ${colors.text}`} />
+            </div>
+            <div>
+              <h3 className="text-2xl md:text-3xl font-bold text-[#051A24] tracking-tight mb-2">
+                {project.title}
+              </h3>
+              <p className="text-sm text-[#273C46]">{project.category}</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Summary */}
-      <div className="p-8 md:p-10">
-        <h4 className="text-sm font-semibold text-zinc-500 tracking-widest uppercase mb-3 flex items-center gap-2">
-          <Lightbulb className="w-4 h-4" /> Summary
-        </h4>
-        <p className="text-zinc-400 leading-relaxed">{project.summary}</p>
-      </div>
+        {/* Summary */}
+        <div className="p-8 md:p-10">
+          <h4 className="text-sm font-semibold text-[#273C46] tracking-widest uppercase mb-3 flex items-center gap-2">
+            <Lightbulb className="w-4 h-4" /> Summary
+          </h4>
+          <p className="text-[#051A24]/70 leading-relaxed">{project.summary}</p>
+        </div>
 
-      {/* Contributions */}
-      <div className="px-8 md:px-10 pb-8 md:pb-10">
-        <h4 className="text-sm font-semibold text-zinc-500 tracking-widest uppercase mb-4 flex items-center gap-2">
-          <Target className="w-4 h-4" /> Contributions
-        </h4>
-        <ul className="space-y-3">
-          {project.contributions.map((contribution, i) => (
-            <motion.li
-              key={i}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="flex items-start gap-3 text-zinc-400"
-            >
-              <ArrowRight size={16} className={`mt-0.5 shrink-0 ${colors.text}`} />
-              <span className="text-sm leading-relaxed">{contribution}</span>
-            </motion.li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Key Features (for CarbonCompanion) */}
-      {project.keyFeatures && (
+        {/* Contributions */}
         <div className="px-8 md:px-10 pb-8 md:pb-10">
-          <h4 className="text-sm font-semibold text-zinc-500 tracking-widest uppercase mb-4 flex items-center gap-2">
-            <Cpu className="w-4 h-4" /> Key Features
+          <h4 className="text-sm font-semibold text-[#273C46] tracking-widest uppercase mb-4 flex items-center gap-2">
+            <Target className="w-4 h-4" /> Contributions
           </h4>
           <ul className="space-y-3">
-            {project.keyFeatures.map((feature, i) => (
-              <motion.li
-                key={i}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="flex items-start gap-3 text-zinc-400"
-              >
-                <span className={`w-1.5 h-1.5 rounded-full mt-2 shrink-0 ${colors.text.replace('text', 'bg')}`} />
-                <span className="text-sm leading-relaxed">{feature}</span>
-              </motion.li>
+            {project.contributions.map((contribution, i) => (
+              <li key={i} className="flex items-start gap-3 text-[#051A24]/70">
+                <ArrowRight size={16} className={`mt-0.5 shrink-0 ${colors.text}`} />
+                <span className="text-sm leading-relaxed">{contribution}</span>
+              </li>
             ))}
           </ul>
         </div>
-      )}
 
-      {/* Key Findings */}
-      <div className="px-8 md:px-10 pb-8 md:pb-10">
-        <h4 className="text-sm font-semibold text-zinc-500 tracking-widest uppercase mb-4 flex items-center gap-2">
-          <Lightbulb className="w-4 h-4" /> Key Findings
-        </h4>
-        <ul className="space-y-3">
-          {project.keyFindings.map((finding, i) => (
-            <motion.li
-              key={i}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 + 0.2 }}
-              className="flex items-start gap-3 text-zinc-400"
-            >
-              <span className={`w-1.5 h-1.5 rounded-full mt-2 shrink-0 ${colors.text.replace('text', 'bg')}`} />
-              <span className="text-sm leading-relaxed">{finding}</span>
-            </motion.li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Technical Highlights (for CarbonCompanion) */}
-      {project.technicalHighlights && (
-        <div className="px-8 md:px-10 pb-8 md:pb-10">
-          <h4 className="text-sm font-semibold text-zinc-500 tracking-widest uppercase mb-4 flex items-center gap-2">
-            <Cpu className="w-4 h-4" /> Technical Highlights
-          </h4>
-          <div className="flex flex-wrap gap-2">
-            {project.technicalHighlights.map((highlight, i) => (
-              <motion.span
-                key={i}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: 0.4 + i * 0.05 }}
-                className="text-xs font-medium px-3 py-1.5 rounded-lg bg-white/[0.04] text-zinc-400 border border-white/[0.07] font-mono"
-              >
-                {highlight}
-              </motion.span>
-            ))}
+        {/* Key Features (for CarbonCompanion) */}
+        {project.keyFeatures && (
+          <div className="px-8 md:px-10 pb-8 md:pb-10">
+            <h4 className="text-sm font-semibold text-[#273C46] tracking-widest uppercase mb-4 flex items-center gap-2">
+              <Cpu className="w-4 h-4" /> Key Features
+            </h4>
+            <ul className="space-y-3">
+              {project.keyFeatures.map((feature, i) => (
+                <li key={i} className="flex items-start gap-3 text-[#051A24]/70">
+                  <span className={`w-1.5 h-1.5 rounded-full mt-2 shrink-0 bg-[#051A24]`} />
+                  <span className="text-sm leading-relaxed">{feature}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Relation to Project */}
-      <div className={`p-8 md:p-10 border-t border-white/[0.06] bg-gradient-to-r ${colors.gradient}`}>
-        <h4 className="text-sm font-semibold text-zinc-500 tracking-widest uppercase mb-3 flex items-center gap-2">
-          <Link2 className="w-4 h-4" /> Relation to Projects
-        </h4>
-        <p className="text-zinc-400 leading-relaxed text-sm">
-          {project.relationToProject}
-        </p>
+        {/* Key Findings */}
+        <div className="px-8 md:px-10 pb-8 md:pb-10">
+          <h4 className="text-sm font-semibold text-[#273C46] tracking-widest uppercase mb-4 flex items-center gap-2">
+            <Lightbulb className="w-4 h-4" /> Key Findings
+          </h4>
+          <ul className="space-y-3">
+            {project.keyFindings.map((finding, i) => (
+              <li key={i} className="flex items-start gap-3 text-[#051A24]/70">
+                <span className={`w-1.5 h-1.5 rounded-full mt-2 shrink-0 bg-[#051A24]`} />
+                <span className="text-sm leading-relaxed">{finding}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Technical Highlights (for CarbonCompanion) */}
+        {project.technicalHighlights && (
+          <div className="px-8 md:px-10 pb-8 md:pb-10">
+            <h4 className="text-sm font-semibold text-[#273C46] tracking-widest uppercase mb-4 flex items-center gap-2">
+              <Cpu className="w-4 h-4" /> Technical Highlights
+            </h4>
+            <div className="flex flex-wrap gap-2">
+              {project.technicalHighlights.map((highlight, i) => (
+                <span
+                  key={i}
+                  className="text-xs font-medium px-3 py-1.5 rounded-lg bg-[#051A24]/5 text-[#051A24]/70 border border-[#051A24]/15 font-mono"
+                >
+                  {highlight}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Relation to Project */}
+        <div className={`p-8 md:p-10 border-t border-[#051A24]/10 ${colors.bg}`}>
+          <h4 className="text-sm font-semibold text-[#273C46] tracking-widest uppercase mb-3 flex items-center gap-2">
+            <Link2 className="w-4 h-4" /> Relation to Projects
+          </h4>
+          <p className="text-[#051A24]/70 leading-relaxed text-sm">
+            {project.relationToProject}
+          </p>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 export default function Research() {
+  const { ref, inView } = useInViewAnimation<HTMLDivElement>();
+
   return (
     <section id="research" className="py-24 px-6">
       <div className="max-w-4xl mx-auto">
-        <SectionHeader
-          title="Research"
-          subtitle="Academic work and AI projects exploring the intersection of technology and real-world impact."
-        />
+        <div
+          ref={ref}
+          className={inView ? "animate-fade-in-up" : "opacity-0"}
+          style={{ animationDelay: "0.1s" }}
+        >
+          <p className="font-mono text-xs tracking-widest text-[#273C46] uppercase mb-3">
+            Research
+          </p>
+          <h2 className="text-[32px] md:text-[40px] font-semibold text-[#051A24] tracking-tight mb-16">
+            Academic <span className="font-mondwest">work</span>
+          </h2>
+        </div>
 
         <div className="space-y-12">
           {RESEARCH_PROJECTS.map((project, index) => (
