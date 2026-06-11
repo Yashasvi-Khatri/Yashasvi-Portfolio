@@ -61,11 +61,11 @@ export default function CTASection() {
           }
         }
       `}</style>
-      <section className="py-24 px-6">
+      <section className="py-8 px-6">
         <div
           ref={containerRef}
           onMouseMove={handleMouseMove}
-          className="max-w-7xl mx-auto bg-white border border-[#051A24]/8 rounded-[40px] py-32 text-center relative overflow-hidden"
+          className="max-w-7xl mx-auto bg-white border border-[#051A24]/8 rounded-[40px] py-16 text-center relative overflow-hidden"
         >
           <h2 className="text-[40px] md:text-[56px] font-semibold text-[#0D212C] tracking-tight mb-10">
             Work <span className="font-mondwest">with</span> me
